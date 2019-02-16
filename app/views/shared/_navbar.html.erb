@@ -1,16 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <!-- El logo nos lleva al home (para eliminar la palabra home del navbar). -->
+  <%= link_to pins_path do %>
+    <%= image_tag asset_path('logo.png'), class: 'img-custom' %>
+  <% end %>
+
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+
+      <!-- ya que el logo va al home, eliminamos el link home
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
+      </li>-->
+
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <%= link_to 'Crear Pin', new_pin_path, class: 'nav-link' %>
+        <!-- <a class="nav-link" href="/pins/new">Crear Pin</a> -->
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,5 +40,17 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+
+    <!--Botones para ingreso de usuario:-->
+    <% if user_signed_in? %>
+      <a href="/users/sign_out" data-method="DELETE" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign out</a>
+      <!muestra un icono de un usuario ramdom x defecto y el email -->
+      <%= current_user.email %>
+      <%= image_tag current_user.avatar, class: 'img-custom img-circle' %> 
+
+    <% else %>
+      <a href="/users/sign_in" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign in</a>
+      <a href="/users/sign_up" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign up</a>
+    <% end %>
   </div>
 </nav>

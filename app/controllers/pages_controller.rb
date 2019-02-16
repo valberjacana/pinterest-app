@@ -1,4 +1,8 @@
 class PagesController < ApplicationController
-  def index
+  def index () end
+
+  def home() 
+    @pins = Pin.all
   end
+
 end
